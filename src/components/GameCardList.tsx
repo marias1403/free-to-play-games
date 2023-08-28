@@ -1,26 +1,17 @@
 import React, { FC } from 'react';
 import { List } from 'antd';
 import GameCard from './GameCard';
+import { IGameCard } from '../types/types';
 
-const data = [
-  {
-    id: 1,
-  },
-  {
-    id: 2,
-  },
-  {
-    id: 3,
-  },
-];
-
-const GameCardList: FC = () => (
+const GameCardList: FC<{
+  games: IGameCard[] | undefined,
+}> = ({ games }) => (
   <List
     grid={{ gutter: 40, column: 3 }}
-    dataSource={data}
-    renderItem={(item) => (
+    dataSource={games}
+    renderItem={(game) => (
       <List.Item>
-        <GameCard />
+        <GameCard game={game} />
       </List.Item>
     )} />
 );

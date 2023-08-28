@@ -11,7 +11,7 @@ const GameListHeader: FC = () => {
   return (
     <Row justify='space-between' align='middle' style={{ margin: '30px 0' }}>
       <Col>
-        <Title level={3} style={{ margin: 0 }}>Игры по запросу «Palia»</Title>
+        <Title level={3} style={{ margin: 0 }}>Все игры</Title>
       </Col>
       <Col>
         <Select

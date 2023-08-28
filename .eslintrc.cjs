@@ -82,5 +82,7 @@ module.exports = {
         '@typescript-eslint/prefer-optional-chain': 'warn',
         'react/jsx-key': 'warn',
         'operator-linebreak': 'off',
+        'no-param-reassign': 'off',
+        'no-floating-promises': 'off',
     },
 };

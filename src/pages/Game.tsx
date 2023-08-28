@@ -43,7 +43,7 @@ const Game: FC = () => {
         <Content style={{ paddingInline: 50 }}>
           <Button
             onClick={() => navigate('/')}
-            style={{ padding: 0, margin: '30px 0' }}
+            style={{ padding: 0, margin: '30px 0 20px' }}
             type='link'
             icon={<ArrowLeftOutlined />}>
             К главной
