@@ -1,13 +1,18 @@
-import React, { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import React, { FC, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { Layout, Space, Row, Col, Button, Typography } from 'antd';
-import HeaderComponent from '../components/HeaderComponent';
-import ScreenshotsCarousel from '../components/ScreenshotsCarousel';
-import FooterComponent from '../components/FooterComponent';
-import gameImage from '../assets/images/game-cover.png';
+import { Layout, Space, Row, Col, Button, Typography, Empty } from 'antd';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import gameDetailsSelector from './selectors';
+import { fetchGame } from './slice';
+import { IGameDetails } from '../../types/types';
+import HeaderComponent from '../../components/HeaderComponent';
+import ScreenshotsCarousel from './ScreenshotsCarousel';
+import FooterComponent from '../../components/FooterComponent';
+import Loader from '../../components/Loader';
 
-const { Content, Footer } = Layout;
+const { Content } = Layout;
 const { Title, Text } = Typography;
 
 const imageColStyle: React.CSSProperties = {
@@ -19,11 +24,37 @@ const imageColStyle: React.CSSProperties = {
 };
 
 const titleStyle: React.CSSProperties = {
-  margin: '0 0 30px',
+  margin: '0 0 20px',
 };
 
-const Game: FC = () => {
+const GamePage: FC = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
+  const [gameDetails, setGameDetails] = useState<IGameDetails>();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | undefined>(undefined);
+  const selectedGame = useAppSelector(gameDetailsSelector);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchGame(id));
+    }
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    setLoading(selectedGame.loading);
+    setError(selectedGame.error);
+    setGameDetails(selectedGame.game);
+  }, [selectedGame]);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (gameDetails === undefined) {
+    return <Empty style={{ margin: 'auto' }} />;
+  }
 
   return (
     <Space
@@ -51,64 +82,65 @@ const Game: FC = () => {
           <Row gutter={70} justify='space-between'>
             <Col style={imageColStyle} span={10}>
               <img
-                style={{ borderRadius: 8, width: '100%', height: 400 }}
-                src={gameImage}
-                alt='Картинка игры' />
+                style={{
+                  borderRadius: 8,
+                  width: '100%',
+                  height: 400,
+                  objectFit: 'cover',
+                }}
+                src={gameDetails.thumbnail}
+                alt={gameDetails.title} />
             </Col>
             <Col span={14}>
               <Title level={1} style={titleStyle}>
-                Palia
+                {gameDetails.title}
               </Title>
               <Row gutter={120}>
                 <Col>
                   <Text type='secondary'>Дата релиза</Text>
                   <Title level={5} style={titleStyle}>
-                    10 августа 2023
+                    {gameDetails.release_date}
                   </Title>
                   <Text type='secondary'>Издатель</Text>
                   <Title level={5} style={titleStyle}>
-                    Singularity Six
+                    {gameDetails.publisher}
                   </Title>
                 </Col>
                 <Col>
                   <Text type='secondary'>Жанр</Text>
                   <Title level={5} style={titleStyle}>
-                    MMORPG
+                    {gameDetails.genre}
                   </Title>
                   <Text type='secondary'>Разработчик</Text>
                   <Title level={5} style={titleStyle}>
-                    Singularity Six
+                    {gameDetails.developer}
                   </Title>
                 </Col>
               </Row>
               <Title level={3}>Скриншоты</Title>
-              <ScreenshotsCarousel />
+              <ScreenshotsCarousel screenshots={gameDetails.screenshots ?? []} />
               <Title level={3}>
                 Системные требования
               </Title>
               <Text type='secondary'>OS</Text>
               <Title level={5} style={titleStyle}>
-                Windows 10 64-bit or higher
+                {gameDetails.minimum_system_requirements.os}
               </Title>
               <Text type='secondary'>Processor</Text>
               <Title level={5} style={titleStyle}>
-                Intel Core i5-4670K / AMD FX-8350 CPU or equivalent
+                {gameDetails.minimum_system_requirements.processor}
               </Title>
               <Text type='secondary'>Memory</Text>
               <Title level={5} style={titleStyle}>
-                4GB
+                {gameDetails.minimum_system_requirements.memory}
               </Title>
               <Text type='secondary'>Graphics</Text>
               <Title level={5} style={titleStyle}>
-                GeForce GTX 660 / Radeon R9 270 or equivalent
+                {gameDetails.minimum_system_requirements.graphics}
               </Title>
               <Text type='secondary'>Storage</Text>
               <Title level={5} style={titleStyle}>
-                16GB
-              </Title>
-              <Text type='secondary'>Additional Notes</Text>
-              <Title level={5} style={titleStyle}>
-                Specifications may change during development
+                {gameDetails.minimum_system_requirements.storage}
               </Title>
             </Col>
           </Row>
@@ -119,4 +151,4 @@ const Game: FC = () => {
   );
 };
 
-export default Game;
+export default GamePage;

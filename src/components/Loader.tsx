@@ -16,7 +16,7 @@ export const loaderWrapperStyle: React.CSSProperties = {
 
 const Loader: FC = () => (
   <div style={loaderWrapperStyle}>
-    <Spin tip='Загружаем игры...' size='large'>
+    <Spin tip='Загрузка...' size='large'>
       <div className='content' />
     </Spin>
   </div>

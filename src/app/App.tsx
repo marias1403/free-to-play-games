@@ -1,15 +1,15 @@
 import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from 'antd';
-import Main from '../pages/Main';
-import Game from '../pages/Game';
+import GamesPage from '../features/games-page/GamesPage';
+import GamePage from '../features/game-details-page/GamePage';
 
 const App = () => (
   <Layout style={{ height: '100vh', backgroundColor: '#ffffff' }}>
     <Suspense>
       <Routes>
-        <Route path='/' element={<Main />} />
-        <Route path='/game' element={<Game />} />
+        <Route path='/' element={<GamesPage />} />
+        <Route path='/:id' element={<GamePage />} />
       </Routes>
     </Suspense>
   </Layout>

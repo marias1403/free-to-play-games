@@ -2,18 +2,18 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Layout, Pagination, Space } from 'antd';
 import type { PaginationProps } from 'antd';
-import HeaderComponent from '../components/HeaderComponent';
-import GameListHeader from '../components/GameListHeader';
-import FooterComponent from '../components/FooterComponent';
-import GameCardList from '../components/GameCardList';
-import { IGameCard } from '../types/types';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import gamesSelector from '../features/game-list/selectors';
-import { fetchGameList } from '../features/game-list/slice';
+import HeaderComponent from '../../components/HeaderComponent';
+import GameListHeader from './GameListHeader';
+import FooterComponent from '../../components/FooterComponent';
+import GameCardList from './GameCardList';
+import { IGameCard } from '../../types/types';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import gamesSelector from './selectors';
+import { fetchGameList } from './slice';
 
 const { Content } = Layout;
 
-const Main: FC = () => {
+const GamesPage: FC = () => {
   const [games, setGames] = useState<IGameCard[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState<boolean>(false);
@@ -32,7 +32,7 @@ const Main: FC = () => {
 
   useEffect(() => {
     dispatch(fetchGameList());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     setLoading(selectedGames.loading);
@@ -72,4 +72,4 @@ const Main: FC = () => {
   );
 };
 
-export default Main;
+export default GamesPage;

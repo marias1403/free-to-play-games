@@ -5,7 +5,7 @@ const { Footer } = Layout;
 const { Text } = Typography;
 
 const footerStyle: React.CSSProperties = {
-  marginTop: 150,
+  marginTop: 100,
   padding: '20px 50px 60px',
   textAlign: 'center',
   color: '#000000',

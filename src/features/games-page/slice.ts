@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IGameCard } from '../../types/types';
 import api from '../../api';
 
-const NAMESPACE = 'gameList';
+const NAMESPACE = 'gamesPage';
 export const fetchGameList = createAsyncThunk(`${NAMESPACE}/fetch`, () => api.games.load());
 export interface GameListState {
   games: IGameCard[];

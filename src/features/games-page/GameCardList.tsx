@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { List } from 'antd';
 import GameCard from './GameCard';
-import { IGameCard } from '../types/types';
+import { IGameCard } from '../../types/types';
 
 const GameCardList: FC<{
   games: IGameCard[] | undefined,
@@ -11,7 +11,7 @@ const GameCardList: FC<{
     dataSource={games}
     renderItem={(game) => (
       <List.Item>
-        <GameCard game={game} />
+        <GameCard id={game.id} game={game} />
       </List.Item>
     )} />
 );
