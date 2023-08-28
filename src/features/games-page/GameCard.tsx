@@ -19,7 +19,7 @@ const GameCard: FC<{ id: number, game: IGameCard }> = ({ id, game }) => {
           <Title level={4} style={{ margin: 0 }}>{game.title}</Title>
         </Col>
         <Col>
-          <Tag>{game.genre}</Tag>
+          <Tag style={{ margin: 0 }}>{game.genre}</Tag>
         </Col>
       </Row>
       <Row justify='space-between'>
