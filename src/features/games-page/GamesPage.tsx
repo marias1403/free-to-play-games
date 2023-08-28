@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { FC, useEffect, useState } from 'react';
-import { Layout, Pagination, Space } from 'antd';
+import { Empty, Layout, Pagination, Space } from 'antd';
 import type { PaginationProps } from 'antd';
 import HeaderComponent from '../../components/HeaderComponent';
 import GameListHeader from './GameListHeader';
@@ -10,6 +10,8 @@ import { IGameCard } from '../../types/types';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import gamesSelector from './selectors';
 import { fetchGameList } from './slice';
+import Loader from '../../components/Loader';
+import Error from '../../components/Error';
 
 const { Content } = Layout;
 
@@ -39,6 +41,19 @@ const GamesPage: FC = () => {
     setError(selectedGames.error);
     setGames(selectedGames.games);
   }, [selectedGames]);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (!games) {
+    return <Empty style={{ margin: 'auto' }} />;
+  }
+
+  if (error) {
+    return <Error />;
+  }
+
   return (
     <Space
       direction='vertical'

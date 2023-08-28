@@ -11,6 +11,7 @@ import HeaderComponent from '../../components/HeaderComponent';
 import ScreenshotsCarousel from './ScreenshotsCarousel';
 import FooterComponent from '../../components/FooterComponent';
 import Loader from '../../components/Loader';
+import Error from '../../components/Error';
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
@@ -52,8 +53,12 @@ const GamePage: FC = () => {
     return <Loader />;
   }
 
-  if (gameDetails === undefined) {
+  if (!gameDetails) {
     return <Empty style={{ margin: 'auto' }} />;
+  }
+
+  if (error) {
+    return <Error />;
   }
 
   return (
