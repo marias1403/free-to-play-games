@@ -9,6 +9,7 @@ import { fetchGame } from './slice';
 import { IGameDetails } from '../../types/types';
 import HeaderComponent from '../../components/HeaderComponent';
 import ScreenshotsCarousel from './ScreenshotsCarousel';
+import GameSystemRequirements from './GameSystemRequirements';
 import FooterComponent from '../../components/FooterComponent';
 import Loader from '../../components/Loader';
 import Error from '../../components/Error';
@@ -48,6 +49,8 @@ const GamePage: FC = () => {
     setError(selectedGame.error);
     setGameDetails(selectedGame.game);
   }, [selectedGame]);
+
+  console.log(gameDetails);
 
   if (loading) {
     return <Loader />;
@@ -127,26 +130,8 @@ const GamePage: FC = () => {
               <Title level={3}>
                 Системные требования
               </Title>
-              <Text type='secondary'>OS</Text>
-              <Title level={5} style={titleStyle}>
-                {gameDetails.minimum_system_requirements.os}
-              </Title>
-              <Text type='secondary'>Processor</Text>
-              <Title level={5} style={titleStyle}>
-                {gameDetails.minimum_system_requirements.processor}
-              </Title>
-              <Text type='secondary'>Memory</Text>
-              <Title level={5} style={titleStyle}>
-                {gameDetails.minimum_system_requirements.memory}
-              </Title>
-              <Text type='secondary'>Graphics</Text>
-              <Title level={5} style={titleStyle}>
-                {gameDetails.minimum_system_requirements.graphics}
-              </Title>
-              <Text type='secondary'>Storage</Text>
-              <Title level={5} style={titleStyle}>
-                {gameDetails.minimum_system_requirements.storage}
-              </Title>
+              <GameSystemRequirements
+                requirements={gameDetails.minimum_system_requirements} />
             </Col>
           </Row>
         </Content>

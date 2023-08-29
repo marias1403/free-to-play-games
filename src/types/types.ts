@@ -26,13 +26,7 @@ export interface IGameDetails {
   developer: string;
   release_date: string;
   freetogame_profile_url: string;
-  minimum_system_requirements: {
-    os: string;
-    processor: string;
-    memory: string;
-    graphics: string;
-    storage: string;
-  },
+  minimum_system_requirements: IGameSystemRequirementsProps,
   screenshots: {
     id: number;
     image: string;
@@ -42,4 +36,12 @@ export interface IGameDetails {
 export interface IScreenshotsCarouselProps {
   id: number;
   image: string;
+}
+
+export interface IGameSystemRequirementsProps {
+  os: string;
+  processor: string;
+  memory: string;
+  graphics: string;
+  storage: string;
 }
