@@ -12,10 +12,12 @@ const headerStyle: React.CSSProperties = {
   alignItems: 'center',
   width: '100%',
   color: '#fff',
-  height: 100,
+  height: 'fit-content',
   paddingInline: 50,
+  paddingTop: 10,
   backgroundColor: 'transparent',
   columnGap: 100,
+  boxSizing: 'border-box',
 };
 
 const treeData = [
@@ -112,7 +114,7 @@ const HeaderComponent: FC = () => {
             showSearch
             style={{ width: '100%', verticalAlign: 'middle' }}
             value={value}
-            dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+            dropdownStyle={{ overflow: 'auto' }}
             placeholder='Фильтр'
             allowClear
             multiple
