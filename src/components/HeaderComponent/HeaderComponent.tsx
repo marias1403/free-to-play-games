@@ -13,12 +13,12 @@ const treeData = [
     disabled: true,
     children: [
       {
-        value: 'windows',
-        title: 'Windows',
+        value: 'pc',
+        title: 'PC (Windows)',
       },
       {
-        value: 'macos',
-        title: 'MacOS',
+        value: 'browser',
+        title: 'Web Browser',
       },
     ],
   },
