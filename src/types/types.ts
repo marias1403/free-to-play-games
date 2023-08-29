@@ -45,3 +45,8 @@ export interface IGameSystemRequirementsProps {
   graphics: string;
   storage: string;
 }
+
+export interface IDateFormatterProps {
+  details: boolean;
+  dateString: string | number | Date;
+}

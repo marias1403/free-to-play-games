@@ -13,6 +13,7 @@ import GameSystemRequirements from './GameSystemRequirements';
 import FooterComponent from '../../components/FooterComponent';
 import Loader from '../../components/Loader';
 import Error from '../../components/Error';
+import RussianDateFormatter from '../../components/RussianDateFormatter';
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
@@ -106,9 +107,7 @@ const GamePage: FC = () => {
               <Row gutter={120}>
                 <Col>
                   <Text type='secondary'>Дата релиза</Text>
-                  <Title level={5} style={titleStyle}>
-                    {gameDetails.release_date}
-                  </Title>
+                  <RussianDateFormatter details dateString={gameDetails.release_date} />
                   <Text type='secondary'>Издатель</Text>
                   <Title level={5} style={titleStyle}>
                     {gameDetails.publisher}
