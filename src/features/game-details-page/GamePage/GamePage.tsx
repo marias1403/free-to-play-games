@@ -3,32 +3,21 @@ import React, { FC, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { Layout, Space, Row, Col, Button, Typography, Empty } from 'antd';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import gameDetailsSelector from './selectors';
-import { fetchGame } from './slice';
-import { IGameDetails } from '../../types/types';
-import HeaderComponent from '../../components/HeaderComponent/HeaderComponent';
-import ScreenshotsCarousel from './ScreenshotsCarousel';
-import GameSystemRequirements from './GameSystemRequirements';
-import FooterComponent from '../../components/FooterComponent/FooterComponent';
-import Loader from '../../components/Loader';
-import Error from '../../components/Error';
-import RussianDateFormatter from '../../components/RussianDateFormatter';
+import styles from './GamePage.module.css';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
+import gameDetailsSelector from '../selectors';
+import { fetchGame } from '../slice';
+import { IGameDetails } from '../../../types/types';
+import HeaderComponent from '../../../components/HeaderComponent/HeaderComponent';
+import ScreenshotsCarousel from '../ScreenshotsCarousel/ScreenshotsCarousel';
+import GameSystemRequirements from '../GameSystemRequirements/GameSystemRequirements';
+import FooterComponent from '../../../components/FooterComponent/FooterComponent';
+import Loader from '../../../components/Loader/Loader';
+import Error from '../../../components/ErrorComponent/ErrorComponent';
+import RussianDateFormatter from '../../../components/RussianDateFormatter/RussianDateFormatter';
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
-
-const imageColStyle: React.CSSProperties = {
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'flex-start',
-  alignItems: 'flex-start',
-  gap: 12,
-};
-
-const titleStyle: React.CSSProperties = {
-  margin: '0 0 20px',
-};
 
 const GamePage: FC = () => {
   const { id } = useParams();
@@ -51,8 +40,6 @@ const GamePage: FC = () => {
     setGameDetails(selectedGame.game);
   }, [selectedGame]);
 
-  console.log(gameDetails);
-
   if (loading) {
     return <Loader />;
   }
@@ -68,58 +55,44 @@ const GamePage: FC = () => {
   return (
     <Space
       direction='vertical'
-      style={{
-        width: '100%',
-        minHeight: '100vh',
-        backgroundColor: '#ffffff',
-      }}>
-      <Layout
-        style={{
-          minHeight: '100vh',
-          display: 'flex',
-          backgroundColor: '#ffffff',
-        }}>
-        <HeaderComponent />
-        <Content style={{ paddingInline: 50 }}>
+      className={styles.space}>
+      <Layout className={styles.layout}>
+        <HeaderComponent isDetails />
+        <Content className={styles.content}>
           <Button
             onClick={() => navigate('/')}
-            style={{ padding: 0, margin: '30px 0 20px' }}
+            className={styles.backButton}
             type='link'
             icon={<ArrowLeftOutlined />}>
             К главной
           </Button>
-          <Row gutter={70} justify='space-between'>
-            <Col style={imageColStyle} span={10}>
+          <Row gutter={50} justify='space-between'>
+            <Col className={styles.imageCol} xs={24} sm={24} md={24} lg={12} xl={12}>
               <img
-                style={{
-                  borderRadius: 8,
-                  width: '100%',
-                  height: 400,
-                  objectFit: 'cover',
-                }}
+                className={styles.gameImage}
                 src={gameDetails.thumbnail}
                 alt={gameDetails.title} />
             </Col>
-            <Col span={14}>
-              <Title level={1} style={titleStyle}>
+            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+              <Title level={1} className={styles.title}>
                 {gameDetails.title}
               </Title>
               <Row gutter={120}>
                 <Col>
                   <Text type='secondary'>Дата релиза</Text>
-                  <RussianDateFormatter details dateString={gameDetails.release_date} />
+                  <RussianDateFormatter isDetails dateString={gameDetails.release_date} />
                   <Text type='secondary'>Издатель</Text>
-                  <Title level={5} style={titleStyle}>
+                  <Title level={5} className={styles.title}>
                     {gameDetails.publisher}
                   </Title>
                 </Col>
                 <Col>
                   <Text type='secondary'>Жанр</Text>
-                  <Title level={5} style={titleStyle}>
+                  <Title level={5} className={styles.title}>
                     {gameDetails.genre}
                   </Title>
                   <Text type='secondary'>Разработчик</Text>
-                  <Title level={5} style={titleStyle}>
+                  <Title level={5} className={styles.title}>
                     {gameDetails.developer}
                   </Title>
                 </Col>

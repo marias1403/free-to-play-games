@@ -83,7 +83,7 @@ const treeData = [
   },
 ];
 
-const HeaderComponent: FC = () => {
+const HeaderComponent: FC<{ isDetails: boolean }> = ({ isDetails }) => {
   const [value, setValue] = useState<string>();
 
   const onChange = (newValue: string) => {
@@ -93,7 +93,10 @@ const HeaderComponent: FC = () => {
   return (
     <Header className={styles.header}>
       <img height={33} width={175} src={logoImg} alt='Логотип' />
-      <Row gutter={15} className={styles.row}>
+      <Row
+        gutter={15}
+        style={{ display: isDetails ? 'none' : 'flex' }}
+        className={styles.row}>
         <Col span={6}>
           <TreeSelect
             showSearch

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, Typography, Tag, Row, Col } from 'antd';
 import { IGameCard } from '../../types/types';
-import RussianDateFormatter from '../../components/RussianDateFormatter';
+import RussianDateFormatter from '../../components/RussianDateFormatter/RussianDateFormatter';
 
 const { Title, Text } = Typography;
 
@@ -29,7 +29,7 @@ const GameCard: FC<{ id: number, game: IGameCard }> = ({ id, game }) => {
           <Text strong>{game.publisher}</Text>
         </Col>
         <Col>
-          <RussianDateFormatter details={false} dateString={game.release_date} />
+          <RussianDateFormatter isDetails={false} dateString={game.release_date} />
         </Col>
       </Row>
     </Card>

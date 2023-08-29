@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from 'antd';
 import GamesPage from '../features/games-page/GamesPage/GamesPage';
-import GamePage from '../features/game-details-page/GamePage';
+import GamePage from '../features/game-details-page/GamePage/GamePage';
 
 const App = () => (
   <Layout style={{ height: '100vh', backgroundColor: '#ffffff' }}>

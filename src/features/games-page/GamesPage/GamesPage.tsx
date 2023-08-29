@@ -11,8 +11,8 @@ import { IGameCard } from '../../../types/types';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import gamesSelector from '../selectors';
 import { fetchGameList } from '../slice';
-import Loader from '../../../components/Loader';
-import Error from '../../../components/Error';
+import Loader from '../../../components/Loader/Loader';
+import Error from '../../../components/ErrorComponent/ErrorComponent';
 
 const { Content } = Layout;
 
@@ -69,7 +69,7 @@ const GamesPage: FC = () => {
           display: 'flex',
           backgroundColor: '#ffffff',
         }}>
-        <HeaderComponent />
+        <HeaderComponent isDetails={false} />
         <Content className={styles.content}>
           <GameListHeader />
           <GameCardList games={itemsToDisplay} />

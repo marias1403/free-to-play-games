@@ -1,27 +1,16 @@
 import React, { FC } from 'react';
 import { Typography, Empty } from 'antd';
-import { IGameSystemRequirementsProps } from '../../types/types';
+import { IGameSystemRequirementsProps } from '../../../types/types';
+import styles from './GameSystemRequirements.module.css';
 
 const { Title, Text } = Typography;
-
-const titleStyle: React.CSSProperties = {
-  margin: '0 0 20px',
-};
-
-const noContentStyle: React.CSSProperties = {
-  width: 250,
-  height: 150,
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-};
 
 const GameSystemRequirements: FC<{
   requirements: IGameSystemRequirementsProps
 }> = ({ requirements }) => {
   if (!requirements) {
     return (
-      <div style={noContentStyle}>
+      <div className={styles.noContent}>
         <Empty />
       </div>
     );
@@ -30,23 +19,23 @@ const GameSystemRequirements: FC<{
   return (
     <>
       <Text type='secondary'>OS</Text>
-      <Title level={5} style={titleStyle}>
+      <Title level={5} className={styles.title}>
         {requirements.os && requirements.os !== '?' ? requirements.os : 'нет информации'}
       </Title>
       <Text type='secondary'>Processor</Text>
-      <Title level={5} style={titleStyle}>
+      <Title level={5} className={styles.title}>
         {requirements.processor && requirements.processor !== '?' ? requirements.processor : 'нет информации'}
       </Title>
       <Text type='secondary'>Memory</Text>
-      <Title level={5} style={titleStyle}>
+      <Title level={5} className={styles.title}>
         {requirements.memory && requirements.memory !== '?' ? requirements.memory : 'нет информации'}
       </Title>
       <Text type='secondary'>Graphics</Text>
-      <Title level={5} style={titleStyle}>
+      <Title level={5} className={styles.title}>
         {requirements.graphics && requirements.graphics !== '?' ? requirements.graphics : 'нет информации'}
       </Title>
       <Text type='secondary'>Storage</Text>
-      <Title level={5} style={titleStyle}>
+      <Title level={5} className={styles.title}>
         {requirements.storage && requirements.storage !== '?' ? requirements.storage : 'нет информации'}
       </Title>
     </>

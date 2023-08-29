@@ -1,0 +1,47 @@
+.space {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  background-color: #ffffff;
+}
+
+.content {
+  padding-inline: 50px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 767px) {
+  .content {
+    padding-inline: 20px;
+  }
+}
+
+.backButton {
+  padding: 0;
+  margin: 30px 0 20px;
+}
+
+.imageCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.gameImage {
+  border-radius: 8px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 40px;
+}
+
+.title {
+  margin: 0 0 20px;
+}

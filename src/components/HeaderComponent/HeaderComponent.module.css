@@ -4,6 +4,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  min-height: 64px;
   color: #fff;
   height: fit-content;
   padding-inline: 50px;
@@ -29,7 +30,7 @@
 }
 
 .row {
-  max-width: 1100px;
+  max-width: 1200px;
   width: 100%;
 }
 
