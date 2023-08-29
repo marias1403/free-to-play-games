@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from 'antd';
-import GamesPage from '../features/games-page/GamesPage';
+import GamesPage from '../features/games-page/GamesPage/GamesPage';
 import GamePage from '../features/game-details-page/GamePage';
 
 const App = () => (

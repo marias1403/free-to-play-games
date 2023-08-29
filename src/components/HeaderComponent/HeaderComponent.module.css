@@ -1,0 +1,44 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  color: #fff;
+  height: fit-content;
+  padding-inline: 50px;
+  padding-top: 10px;
+  background-color: transparent;
+  column-gap: 100px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 1023px) {
+  .header {
+    padding-top: 20px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    padding-inline: 20px;
+  }
+}
+
+.row {
+  max-width: 1100px;
+  width: 100%;
+}
+
+.treeSelect {
+  width: 100%;
+  vertical-align: middle;
+}
+
+.search {
+  width: 100%;
+  vertical-align: middle;
+}

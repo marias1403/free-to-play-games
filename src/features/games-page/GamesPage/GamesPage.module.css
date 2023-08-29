@@ -1,0 +1,9 @@
+.content {
+  padding-inline: 50px;
+}
+
+@media screen and (max-width: 767px) {
+  .content {
+    padding-inline: 20px;
+  }
+}

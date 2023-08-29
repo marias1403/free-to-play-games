@@ -2,16 +2,17 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Empty, Layout, Pagination, Space } from 'antd';
 import type { PaginationProps } from 'antd';
-import HeaderComponent from '../../components/HeaderComponent';
-import GameListHeader from './GameListHeader';
-import FooterComponent from '../../components/FooterComponent';
-import GameCardList from './GameCardList';
-import { IGameCard } from '../../types/types';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import gamesSelector from './selectors';
-import { fetchGameList } from './slice';
-import Loader from '../../components/Loader';
-import Error from '../../components/Error';
+import styles from './GamesPage.module.css';
+import HeaderComponent from '../../../components/HeaderComponent/HeaderComponent';
+import GameListHeader from '../GameListHeader';
+import FooterComponent from '../../../components/FooterComponent/FooterComponent';
+import GameCardList from '../GameCardList';
+import { IGameCard } from '../../../types/types';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
+import gamesSelector from '../selectors';
+import { fetchGameList } from '../slice';
+import Loader from '../../../components/Loader';
+import Error from '../../../components/Error';
 
 const { Content } = Layout;
 
@@ -69,7 +70,7 @@ const GamesPage: FC = () => {
           backgroundColor: '#ffffff',
         }}>
         <HeaderComponent />
-        <Content style={{ paddingInline: 50 }}>
+        <Content className={styles.content}>
           <GameListHeader />
           <GameCardList games={itemsToDisplay} />
           <Pagination
@@ -78,8 +79,7 @@ const GamesPage: FC = () => {
             onChange={onChange}
             total={games.length}
             pageSize={itemsPerPage}
-            showSizeChanger={false}
-            showTotal={(total) => `Найдено всего: ${total}`} />
+            showSizeChanger={false} />
         </Content>
         <FooterComponent />
       </Layout>

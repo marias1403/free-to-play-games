@@ -1,24 +1,10 @@
 import React, { FC, useState } from 'react';
 import { Layout, Input, TreeSelect, Row, Col } from 'antd';
-import logoImg from '../assets/images/logo.svg';
+import styles from './HeaderComponent.module.css';
+import logoImg from '../../assets/images/logo.svg';
 
 const { Header } = Layout;
 const { Search } = Input;
-
-const headerStyle: React.CSSProperties = {
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  width: '100%',
-  color: '#fff',
-  height: 'fit-content',
-  paddingInline: 50,
-  paddingTop: 10,
-  backgroundColor: 'transparent',
-  columnGap: 100,
-  boxSizing: 'border-box',
-};
 
 const treeData = [
   {
@@ -101,18 +87,17 @@ const HeaderComponent: FC = () => {
   const [value, setValue] = useState<string>();
 
   const onChange = (newValue: string) => {
-    console.log(newValue);
     setValue(newValue);
   };
 
   return (
-    <Header style={headerStyle}>
+    <Header className={styles.header}>
       <img height={33} width={175} src={logoImg} alt='Логотип' />
-      <Row gutter={15} style={{ width: '100%' }}>
+      <Row gutter={15} className={styles.row}>
         <Col span={6}>
           <TreeSelect
             showSearch
-            style={{ width: '100%', verticalAlign: 'middle' }}
+            className={styles.treeSelect}
             value={value}
             dropdownStyle={{ overflow: 'auto' }}
             placeholder='Фильтр'
@@ -124,7 +109,7 @@ const HeaderComponent: FC = () => {
         </Col>
         <Col span={18}>
           <Search
-            style={{ width: '100%', verticalAlign: 'middle' }}
+            className={styles.search}
             placeholder='Поиск по играм'
             enterButton='Поиск' />
         </Col>
