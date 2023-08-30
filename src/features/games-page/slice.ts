@@ -1,9 +1,25 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IGameCard, GameListState } from '../../types/types';
 import api from '../../api';
+import { MAX_FETCH_RETRIES } from '../../constants/constants';
 
 const NAMESPACE = 'gamesPage';
-export const fetchGameList = createAsyncThunk(`${NAMESPACE}/fetch`, () => api.games.load());
+
+export const fetchGameList = createAsyncThunk(
+  `${NAMESPACE}/fetch`,
+  async () => {
+    for (let retry = 0; retry < MAX_FETCH_RETRIES; retry++) {
+      try {
+        return await api.games.load();
+      } catch (error) {
+        if (retry === MAX_FETCH_RETRIES - 1) {
+          throw error;
+        }
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      }
+    }
+  },
+);
 
 export const fetchGameListByFilters = createAsyncThunk(
   `${NAMESPACE}/fetchByFilters`,
@@ -28,9 +44,11 @@ export const gameListSlice = createSlice({
     builder.addCase(fetchGameList.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(fetchGameList.fulfilled, (state, action: PayloadAction<IGameCard[]>) => {
+    builder.addCase(fetchGameList.fulfilled, (state, action) => {
       state.loading = false;
-      state.games = action.payload;
+      if (action.payload) {
+        state.games = action.payload;
+      }
     });
     builder.addCase(fetchGameList.rejected, (state, action) => {
       state.loading = false;

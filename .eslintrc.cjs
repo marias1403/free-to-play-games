@@ -84,5 +84,9 @@ module.exports = {
         'operator-linebreak': 'off',
         'no-param-reassign': 'off',
         'no-floating-promises': 'off',
+        'no-plusplus': 'off',
+        'no-await-in-loop': 'off',
+        'no-promise-executor-return': 'off',
+        'consistent-return': 'off',
     },
 };
