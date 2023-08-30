@@ -7,6 +7,7 @@
 - React 18+ и Redux / Redux Toolkit
 - Использовано Free-To-Play Games API
 - React Router v6
+- TypeScript
 - Фреймворк UI Ant Design
 - Пакетный менеджер npm
 - Приложение запускается по адресу localhost:3001 командой npm start
