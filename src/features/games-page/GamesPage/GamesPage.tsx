@@ -4,9 +4,9 @@ import { Empty, Layout, Pagination, Space } from 'antd';
 import type { PaginationProps } from 'antd';
 import styles from './GamesPage.module.css';
 import HeaderComponent from '../../../components/HeaderComponent/HeaderComponent';
-import GameListHeader from '../GameListHeader';
+import GameListFilters from '../GameListFilters/GameListFilters';
 import FooterComponent from '../../../components/FooterComponent/FooterComponent';
-import GameCardList from '../GameCardList';
+import GameCardList from '../GameCardList/GameCardList';
 import { IGameCard } from '../../../types/types';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import gamesSelector from '../selectors';
@@ -29,7 +29,7 @@ const GamesPage: FC = () => {
   const endIndex = startIndex + itemsPerPage;
   const itemsToDisplay: IGameCard[] = games.slice(startIndex, endIndex);
 
-  const onChange: PaginationProps['onChange'] = (page) => {
+  const onPageChange: PaginationProps['onChange'] = (page) => {
     setCurrentPage(page);
   };
 
@@ -42,10 +42,6 @@ const GamesPage: FC = () => {
     setError(selectedGames.error);
     setGames(selectedGames.games);
   }, [selectedGames]);
-
-  if (loading) {
-    return <Loader />;
-  }
 
   if (!games) {
     return <Empty style={{ margin: 'auto' }} />;
@@ -69,14 +65,16 @@ const GamesPage: FC = () => {
           display: 'flex',
           backgroundColor: '#ffffff',
         }}>
-        <HeaderComponent isDetails={false} />
+        <HeaderComponent />
         <Content className={styles.content}>
-          <GameListHeader />
-          <GameCardList games={itemsToDisplay} />
+          <GameListFilters />
+          {
+            loading ? <Loader /> : <GameCardList games={itemsToDisplay} />
+          }
           <Pagination
             style={{ marginTop: 50 }}
             current={currentPage}
-            onChange={onChange}
+            onChange={onPageChange}
             total={games.length}
             pageSize={itemsPerPage}
             showSizeChanger={false} />

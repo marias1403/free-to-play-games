@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, Typography, Tag, Row, Col } from 'antd';
-import { IGameCard } from '../../types/types';
-import RussianDateFormatter from '../../components/RussianDateFormatter/RussianDateFormatter';
+import { IGameCard } from '../../../types/types';
+import styles from './GameCard.module.css';
+import RussianDateFormatter from '../../../components/RussianDateFormatter/RussianDateFormatter';
 
 const { Title, Text } = Typography;
 
@@ -17,10 +18,14 @@ const GameCard: FC<{ id: number, game: IGameCard }> = ({ id, game }) => {
     <Card onClick={onCardClick} hoverable cover={<img alt={game.title} src={game.thumbnail} />}>
       <Row justify='space-between'>
         <Col>
-          <Title level={4} style={{ margin: 0 }}>{game.title}</Title>
+          <Title level={4} className={styles.title}>
+            {game.title}
+          </Title>
         </Col>
         <Col>
-          <Tag style={{ margin: 0 }}>{game.genre}</Tag>
+          <Tag className={styles.tag}>
+            {game.genre}
+          </Tag>
         </Col>
       </Row>
       <Row justify='space-between'>

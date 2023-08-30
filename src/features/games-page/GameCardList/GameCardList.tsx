@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { List } from 'antd';
-import GameCard from './GameCard';
-import { IGameCard } from '../../types/types';
+import GameCard from '../GameCard/GameCard';
+import { IGameCard } from '../../../types/types';
+import styles from './GameCardList.module.css';
 
 const GameCardList: FC<{
   games: IGameCard[] | undefined,
@@ -16,7 +17,7 @@ const GameCardList: FC<{
       xl: 3,
       xxl: 4,
     }}
-    style={{ width: '100%' }}
+    className={styles.list}
     dataSource={games}
     renderItem={(game) => (
       <List.Item>

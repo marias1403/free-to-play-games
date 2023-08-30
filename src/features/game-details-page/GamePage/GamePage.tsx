@@ -57,7 +57,7 @@ const GamePage: FC = () => {
       direction='vertical'
       className={styles.space}>
       <Layout className={styles.layout}>
-        <HeaderComponent isDetails />
+        <HeaderComponent />
         <Content className={styles.content}>
           <Button
             onClick={() => navigate('/')}
@@ -66,7 +66,7 @@ const GamePage: FC = () => {
             icon={<ArrowLeftOutlined />}>
             К главной
           </Button>
-          <Row gutter={50} justify='space-between'>
+          <Row gutter={{ xs: 0, sm: 0, md: 0, lg: 70 }} justify='space-between'>
             <Col className={styles.imageCol} xs={24} sm={24} md={24} lg={12} xl={12}>
               <img
                 className={styles.gameImage}
@@ -77,26 +77,20 @@ const GamePage: FC = () => {
               <Title level={1} className={styles.title}>
                 {gameDetails.title}
               </Title>
-              <Row gutter={120}>
-                <Col>
-                  <Text type='secondary'>Дата релиза</Text>
-                  <RussianDateFormatter isDetails dateString={gameDetails.release_date} />
-                  <Text type='secondary'>Издатель</Text>
-                  <Title level={5} className={styles.title}>
-                    {gameDetails.publisher}
-                  </Title>
-                </Col>
-                <Col>
-                  <Text type='secondary'>Жанр</Text>
-                  <Title level={5} className={styles.title}>
-                    {gameDetails.genre}
-                  </Title>
-                  <Text type='secondary'>Разработчик</Text>
-                  <Title level={5} className={styles.title}>
-                    {gameDetails.developer}
-                  </Title>
-                </Col>
-              </Row>
+              <Text type='secondary'>Дата релиза</Text>
+              <RussianDateFormatter isDetails dateString={gameDetails.release_date} />
+              <Text type='secondary'>Жанр</Text>
+              <Title level={5} style={{ margin: '0 0 20px' }}>
+                {gameDetails.genre}
+              </Title>
+              <Text type='secondary'>Разработчик</Text>
+              <Title level={5} style={{ margin: '0 0 20px' }}>
+                {gameDetails.developer}
+              </Title>
+              <Text type='secondary'>Издатель</Text>
+              <Title level={5} style={{ margin: '0 0 20px' }}>
+                {gameDetails.publisher}
+              </Title>
               <Title level={3}>Скриншоты</Title>
               <ScreenshotsCarousel screenshots={gameDetails.screenshots ?? []} />
               <Title level={3}>

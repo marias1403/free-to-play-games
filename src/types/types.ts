@@ -50,3 +50,15 @@ export interface IDateFormatterProps {
   isDetails: boolean;
   dateString: string | number | Date;
 }
+
+export interface GameListState {
+  games: IGameCard[];
+  loading: boolean;
+  error: string | undefined;
+}
+
+export interface IFilterParamsState {
+  platform: string | undefined,
+  category: string | undefined,
+  sortBy: string | undefined,
+}

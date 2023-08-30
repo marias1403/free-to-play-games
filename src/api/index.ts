@@ -17,25 +17,18 @@ export default {
       };
       return axios.request<IGameCard[]>(options).then((response) => response.data);
     },
-    loadByPlatform: () => {
-      const options = {
-        method: 'GET',
-        url: `${API_URL}/games`,
-        params: { platform: 'pc' },
-        headers: {
-          'X-RapidAPI-Key': 'cffa014724msh93a69d153bdec0ep1a261ejsn857f5e848ba6',
-          'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com',
-        },
-        timeout: 10000,
-      };
-      return axios.request<IGameCard[]>(options).then((response) => response.data);
-    },
-    loadByCategory: () => {
+    loadWithFilters: (
+      platform: string | undefined,
+      category: string | undefined,
+      sortBy: string | undefined,
+    ) => {
       const options = {
         method: 'GET',
         url: `${API_URL}/games`,
         params: {
-          category: 'shooter',
+          platform,
+          category,
+          'sort-by': sortBy,
         },
         headers: {
           'X-RapidAPI-Key': 'cffa014724msh93a69d153bdec0ep1a261ejsn857f5e848ba6',
