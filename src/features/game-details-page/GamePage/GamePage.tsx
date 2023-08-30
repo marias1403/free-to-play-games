@@ -40,6 +40,24 @@ const GamePage: FC = () => {
     setGameDetails(selectedGame.game);
   }, [selectedGame]);
 
+  useEffect(() => {
+    const savedGameDetails = localStorage.getItem('gameDetails');
+    if (savedGameDetails) {
+      const parsedGameDetails: IGameDetails = JSON.parse(savedGameDetails);
+      setGameDetails(parsedGameDetails);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (gameDetails) {
+      localStorage.setItem('gameDetails', JSON.stringify(gameDetails));
+      const deleteTimer = setTimeout(() => {
+        localStorage.removeItem('gameDetails');
+      }, 5 * 60 * 1000);
+      return () => clearTimeout(deleteTimer);
+    }
+  }, [gameDetails]);
+
   if (loading) {
     return <Loader />;
   }
