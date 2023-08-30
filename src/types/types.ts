@@ -56,13 +56,13 @@ export interface IDateFormatterProps {
 export interface GameListState {
   games: IGameCard[];
   loading: boolean;
-  error: string | undefined;
+  error?: string;
 }
 
 export interface IFilterParamsState {
-  platform: string | undefined,
-  category: string | undefined,
-  sortBy: string | undefined,
+  platform?: string,
+  category?: string,
+  sortBy?: string,
 }
 
 export interface IPaginationComponentProps {

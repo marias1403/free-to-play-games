@@ -21,9 +21,9 @@ export const fetchGame = createAsyncThunk(
 );
 
 export interface GameDetailsPageState {
-  game: IGameDetails | undefined;
+  game?: IGameDetails;
   loading: boolean;
-  error: string | undefined;
+  error?: string;
 }
 
 const initialState: GameDetailsPageState = {

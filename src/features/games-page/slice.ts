@@ -24,9 +24,9 @@ export const fetchGameList = createAsyncThunk(
 export const fetchGameListByFilters = createAsyncThunk(
   `${NAMESPACE}/fetchByFilters`,
   (params: {
-    platform: string | undefined,
-    category: string | undefined,
-    sortBy: string | undefined }) => (
+    platform?: string,
+    category?: string,
+    sortBy?: string }) => (
     api.games.loadWithFilters(params.platform, params.category, params.sortBy)
   ),
 );
