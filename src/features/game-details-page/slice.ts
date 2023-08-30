@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IGameDetails } from '../../types/types';
 import api from '../../api';
+import { MAX_FETCH_RETRIES } from '../../constants/constants';
 
 const NAMESPACE = 'gameDetailsPage';
 export const fetchGame = createAsyncThunk(`${NAMESPACE}/fetchGame`, (id: string) => api.game.details(id));
