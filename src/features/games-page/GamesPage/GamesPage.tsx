@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { FC, useEffect, useState } from 'react';
-import { Empty, Layout, Pagination, Space } from 'antd';
-import type { PaginationProps } from 'antd';
+import { Empty, Layout, Space } from 'antd';
 import styles from './GamesPage.module.css';
 import HeaderComponent from '../../../components/HeaderComponent/HeaderComponent';
 import GameListFilters from '../GameListFilters/GameListFilters';
@@ -13,30 +12,17 @@ import gamesSelector from '../selectors';
 import { fetchGameList } from '../slice';
 import Loader from '../../../components/Loader/Loader';
 import Error from '../../../components/ErrorComponent/ErrorComponent';
+import PaginationComponent from '../PaginationComponent/PaginationComponent';
 
 const { Content } = Layout;
 
 const GamesPage: FC = () => {
   const [games, setGames] = useState<IGameCard[]>([]);
-
-  const currentPageFromLocalStorage = localStorage.getItem('currentPage');
-  const initialPage = currentPageFromLocalStorage ? parseInt(currentPageFromLocalStorage, 10) : 1;
-  const [currentPage, setCurrentPage] = useState(initialPage);
-
+  const [itemsToDisplay, setItemsToDisplay] = useState<IGameCard[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>(undefined);
   const selectedGames = useAppSelector(gamesSelector);
   const dispatch = useAppDispatch();
-
-  const itemsPerPage = 9;
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const itemsToDisplay: IGameCard[] = games.slice(startIndex, endIndex);
-
-  const onPageChange: PaginationProps['onChange'] = (page) => {
-    setCurrentPage(page);
-    localStorage.setItem('currentPage', page.toString());
-  };
 
   useEffect(() => {
     dispatch(fetchGameList());
@@ -67,13 +53,10 @@ const GamesPage: FC = () => {
           {
             loading ? <Loader /> : <GameCardList games={itemsToDisplay} />
           }
-          <Pagination
-            style={{ marginTop: 50 }}
-            current={currentPage}
-            onChange={onPageChange}
+          <PaginationComponent
+            games={games}
             total={games.length}
-            pageSize={itemsPerPage}
-            showSizeChanger={false} />
+            onSetItemsToDisplay={setItemsToDisplay} />
         </Content>
         <FooterComponent />
       </Layout>

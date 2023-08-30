@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export interface IGameCard {
   id: number;
   title: string;
@@ -61,4 +63,10 @@ export interface IFilterParamsState {
   platform: string | undefined,
   category: string | undefined,
   sortBy: string | undefined,
+}
+
+export interface IPaginationComponentProps {
+  games: IGameCard[];
+  total: number,
+  onSetItemsToDisplay: Dispatch<SetStateAction<IGameCard[]>>,
 }
