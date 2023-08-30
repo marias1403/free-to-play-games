@@ -1,46 +1,52 @@
-# Getting Started with Create React App
+# Тестовое задание для стажера Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Интерфейс для сайта Free-To-Play Games, состоящий из двух страниц.
 
-## Available Scripts
+## Стек и технические характеристики
+- Адаптивный интерфейс
+- React 18+ и Redux / Redux Toolkit
+- Использовано Free-To-Play Games API
+- React Router v6
+- Фреймворк UI Ant Design
+- Пакетный менеджер npm
+- Приложение запускается по адресу localhost:3001 командой npm start
+- При переходах по ссылкам страница не перезагружается
+- Если карточка игры была открыта, то она доступна при последующих открытиях (перезагрузках) страницы без дополнительного запроса в течение 5 минут
+- Проверка кода с помощью ESLint
 
-In the project directory, you can run:
+## Что было реализовано
 
-### `npm start`
+### Главная страница
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Показывает игры
+- Игры можно отфильтровать по платформе и жанру
+- Игры можно отсортировать по релевантности, популярности, дате релиза, названию
+- Каждая игра в списке содержит: название, дата релиза в российском формате, издатель, жанр, картинка
+- По клику на игру происходит переход на страницу игры
+- На загрузку игр показывается индикатор загрузки
+- Если не получилось получить данные, это сообщается пользователю
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Страница игры
 
-### `npm test`
+- Содержит: название, дата релиза в российском формате, издатель, разработчик, жанр, картинка/постер, карусель скриншотов, системные требования
+- На странице есть кнопка для возврата к списку игр
+- На загрузку игры показывается индикатор загрузки
+- Если не получилось получить данные, это сообщается пользователю
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Что было реализовано из опциональных заданий
+- TypeScript ✅
+- Пагинация (учитывание тысячи тайтлов) ✅
+- 3 попытки повторного запроса при неудачном запросе ✅
+- При переходе со страницы на страницу запросы, относящиеся к старой странице, прерываются ✅
+- Бэкенд на Node.JS ✅
+- Покрытие кода юнит-тестами ✅
 
-### `npm run build`
+## Доступные команды
+В каталоге проекта вы можете выполнить следующие команды:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. **npm start:** запускает приложение в режиме разработки. Откройте http://localhost:3000 в браузере, чтобы увидеть его.
+2. **npm run build:** собирает приложение для производственной среды в папке build.
+3. **npm test:** запускает тестовый раннер в интерактивном режиме.
+4. **npm run eject:** извлекает конфигурацию Create React App для полного контроля над конфигурацией проекта.
+5. **npm run lint:** проверяет JavaScript и JSX файлы проекта на наличие ошибок.
+6. **npm run lint:fix:** проверяет JavaScript и JSX файлы проекта на наличие ошибок и автоматически исправляет исправляемые проблемы.
