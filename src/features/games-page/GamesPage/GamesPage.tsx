@@ -18,7 +18,11 @@ const { Content } = Layout;
 
 const GamesPage: FC = () => {
   const [games, setGames] = useState<IGameCard[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
+
+  const currentPageFromLocalStorage = localStorage.getItem('currentPage');
+  const initialPage = currentPageFromLocalStorage ? parseInt(currentPageFromLocalStorage, 10) : 1;
+  const [currentPage, setCurrentPage] = useState(initialPage);
+
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>(undefined);
   const selectedGames = useAppSelector(gamesSelector);
@@ -31,6 +35,7 @@ const GamesPage: FC = () => {
 
   const onPageChange: PaginationProps['onChange'] = (page) => {
     setCurrentPage(page);
+    localStorage.setItem('currentPage', page.toString());
   };
 
   useEffect(() => {
@@ -54,17 +59,8 @@ const GamesPage: FC = () => {
   return (
     <Space
       direction='vertical'
-      style={{
-        width: '100%',
-        minHeight: '100vh',
-        backgroundColor: '#ffffff',
-      }}>
-      <Layout
-        style={{
-          minHeight: '100vh',
-          display: 'flex',
-          backgroundColor: '#ffffff',
-        }}>
+      className={styles.space}>
+      <Layout className={styles.layout}>
         <HeaderComponent />
         <Content className={styles.content}>
           <GameListFilters />

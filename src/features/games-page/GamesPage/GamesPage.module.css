@@ -1,3 +1,15 @@
+.space {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  background-color: #ffffff;
+}
+
 .content {
   padding-inline: 50px;
   box-sizing: border-box;
