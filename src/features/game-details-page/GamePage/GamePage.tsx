@@ -30,10 +30,7 @@ const GamePage: FC = () => {
 
   useEffect(() => {
     if (id) {
-      const promise = dispatch(fetchGame(id));
-      return () => {
-        promise.abort();
-      };
+      dispatch(fetchGame(id));
     }
   }, [dispatch, id]);
 

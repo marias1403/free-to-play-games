@@ -25,10 +25,7 @@ const GamesPage: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const promise = dispatch(fetchGameList());
-    return () => {
-      promise.abort();
-    };
+    dispatch(fetchGameList());
   }, [dispatch]);
 
   useEffect(() => {
