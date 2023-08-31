@@ -5,7 +5,7 @@ const API_URL = 'https://free-to-play-games-database.p.rapidapi.com/api';
 
 export default {
   games: {
-    load: () => {
+    load: (signal: AbortSignal) => {
       const options = {
         method: 'GET',
         url: `${API_URL}/games`,
@@ -14,6 +14,7 @@ export default {
           'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com',
         },
         timeout: 10000,
+        signal,
       };
       return axios.request<IGameCard[]>(options).then((response) => response.data);
     },
@@ -21,6 +22,7 @@ export default {
       platform: string | undefined,
       category: string | undefined,
       sortBy: string | undefined,
+      signal: AbortSignal,
     ) => {
       const options = {
         method: 'GET',
@@ -35,12 +37,13 @@ export default {
           'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com',
         },
         timeout: 10000,
+        signal,
       };
       return axios.request<IGameCard[]>(options).then((response) => response.data);
     },
   },
   game: {
-    details: (id: string) => {
+    details: (id: string, signal: AbortSignal) => {
       const options = {
         method: 'GET',
         url: `${API_URL}/game`,
@@ -50,6 +53,7 @@ export default {
           'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com',
         },
         timeout: 10000,
+        signal,
       };
       return axios.request<IGameDetails>(options).then((response) => response.data);
     },

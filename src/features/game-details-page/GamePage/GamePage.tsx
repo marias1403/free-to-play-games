@@ -30,7 +30,10 @@ const GamePage: FC = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(fetchGame(id));
+      const promise = dispatch(fetchGame(id));
+      return () => {
+        promise.abort();
+      };
     }
   }, [dispatch, id]);
 
@@ -43,7 +46,7 @@ const GamePage: FC = () => {
   useEffect(() => {
     const savedGameDetails = localStorage.getItem('gameDetails');
     if (savedGameDetails) {
-      const parsedGameDetails: IGameDetails = JSON.parse(savedGameDetails);
+      const parsedGameDetails: IGameDetails = JSON.parse(savedGameDetails) as IGameDetails;
       setGameDetails(parsedGameDetails);
     }
   }, []);
