@@ -1,7 +1,11 @@
 import axios from 'axios';
 import { IGameCard, IGameDetails } from '../types/types';
+import { API_URL } from '../constants/constants';
 
-const API_URL = 'https://free-to-play-games-database.p.rapidapi.com/api';
+const headers = {
+  'X-RapidAPI-Key': 'cffa014724msh93a69d153bdec0ep1a261ejsn857f5e848ba6',
+  'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com',
+};
 
 export default {
   games: {
@@ -9,11 +13,7 @@ export default {
       const options = {
         method: 'GET',
         url: `${API_URL}/games`,
-        headers: {
-          'X-RapidAPI-Key': 'cffa014724msh93a69d153bdec0ep1a261ejsn857f5e848ba6',
-          'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com',
-        },
-        timeout: 10000,
+        headers,
       };
       return axios.request<IGameCard[]>(options).then((response) => response.data);
     },
@@ -31,11 +31,7 @@ export default {
           category,
           'sort-by': sortBy,
         },
-        headers: {
-          'X-RapidAPI-Key': 'cffa014724msh93a69d153bdec0ep1a261ejsn857f5e848ba6',
-          'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com',
-        },
-        timeout: 10000,
+        headers,
         signal,
       };
       return axios.request<IGameCard[]>(options).then((response) => response.data);
@@ -47,11 +43,7 @@ export default {
         method: 'GET',
         url: `${API_URL}/game`,
         params: { id },
-        headers: {
-          'X-RapidAPI-Key': 'cffa014724msh93a69d153bdec0ep1a261ejsn857f5e848ba6',
-          'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com',
-        },
-        timeout: 10000,
+        headers,
       };
       return axios.request<IGameDetails>(options).then((response) => response.data);
     },
