@@ -26,8 +26,8 @@ export const fetchGameListByFilters = createAsyncThunk(
   (params: {
     platform?: string,
     category?: string,
-    sortBy?: string }, thunkAPI) => (
-    api.games.loadWithFilters(params.platform, params.category, params.sortBy, thunkAPI.signal)
+    sortBy?: string }) => (
+    api.games.loadWithFilters(params.platform, params.category, params.sortBy)
   ),
 );
 

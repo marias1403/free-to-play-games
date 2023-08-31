@@ -10,9 +10,7 @@ const PaginationComponent: FC<IPaginationComponentProps> = (
     onSetItemsToDisplay,
   },
 ) => {
-  const currentPageFromLocalStorage = localStorage.getItem('currentPage');
-  const initialPage = currentPageFromLocalStorage ? parseInt(currentPageFromLocalStorage, 10) : 1;
-  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const itemsPerPage = DEFAULT_ITEMS_PER_PAGE;
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -20,11 +18,14 @@ const PaginationComponent: FC<IPaginationComponentProps> = (
 
   useEffect(() => {
     onSetItemsToDisplay(games.slice(startIndex, endIndex));
-  }, [games, startIndex, endIndex, onSetItemsToDisplay]);
+  }, [currentPage, endIndex, games, onSetItemsToDisplay, startIndex]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [games]);
 
   const onPageChange: PaginationProps['onChange'] = (page) => {
     setCurrentPage(page);
-    localStorage.setItem('currentPage', page.toString());
   };
 
   return (

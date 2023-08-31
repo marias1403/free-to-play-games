@@ -50,7 +50,7 @@ export interface IGameSystemRequirementsProps {
 
 export interface IDateFormatterProps {
   isDetails: boolean;
-  dateString: string | number | Date;
+  dateString: string;
 }
 
 export interface GameListState {
