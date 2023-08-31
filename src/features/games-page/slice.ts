@@ -7,10 +7,10 @@ const NAMESPACE = 'gamesPage';
 
 export const fetchGameList = createAsyncThunk(
   `${NAMESPACE}/fetch`,
-  async (arg, thunkAPI) => {
+  async () => {
     for (let retry = 0; retry < MAX_FETCH_RETRIES; retry++) {
       try {
-        return await api.games.load(thunkAPI.signal);
+        return await api.games.load();
       } catch (error) {
         if (retry === MAX_FETCH_RETRIES - 1) {
           throw error;
@@ -53,9 +53,7 @@ export const gameListSlice = createSlice({
     builder.addCase(fetchGameList.rejected, (state, action) => {
       state.loading = false;
       state.games = [];
-      if (!action.meta.aborted) {
-        state.error = action.error.message;
-      }
+      state.error = action.error.message;
     });
 
     builder.addCase(fetchGameListByFilters.pending, (state) => {

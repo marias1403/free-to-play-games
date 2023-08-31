@@ -6,10 +6,10 @@ import { MAX_FETCH_RETRIES } from '../../constants/constants';
 const NAMESPACE = 'gameDetailsPage';
 export const fetchGame = createAsyncThunk(
   `${NAMESPACE}/fetchGame`,
-  async (id: string, thunkAPI) => {
+  async (id: string) => {
     for (let retry = 0; retry < MAX_FETCH_RETRIES; retry++) {
       try {
-        return await api.game.details(id, thunkAPI.signal);
+        return await api.game.details(id);
       } catch (error) {
         if (retry === MAX_FETCH_RETRIES - 1) {
           throw error;
@@ -48,9 +48,7 @@ export const gameDetailsPageSlice = createSlice({
     builder.addCase(fetchGame.rejected, (state, action) => {
       state.loading = false;
       state.game = undefined;
-      if (!action.meta.aborted) {
-        state.error = action.error.message;
-      }
+      state.error = action.error.message;
     });
   },
   reducers: {},
