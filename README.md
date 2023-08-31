@@ -2,6 +2,9 @@
 
 Интерфейс для сайта Free-To-Play Games, состоящий из двух страниц.
 
+### Демо
+https://marias1403.github.io/free-to-play-games
+
 ## Стек и технические характеристики
 - Адаптивный интерфейс
 - TypeScript
